@@ -1,0 +1,90 @@
+[
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 1,
+	"fields": {
+	  "title": "Сезонные рецепты",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 2,
+	"fields": {
+	  "title": "Cалаты",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 3,
+	"fields": {
+	  "title": "Закуски",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 4,
+	"fields": {
+	  "title": "Каши",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 5,
+	"fields": {
+	  "title": "Первые блюда",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 6,
+	"fields": {
+	  "title": "Выпечка",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 7,
+	"fields": {
+	  "title": "Постные блюда",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 8,
+	"fields": {
+	  "title": "Вторые блюда",
+	  "recipes": []
+	}
+  },
+    {
+	"model": "recipe_book.recipecategories",
+	"pk": 9,
+	"fields": {
+	  "title": "Рецепты пасты",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 10,
+	"fields": {
+	  "title": "Напитки",
+	  "recipes": []
+	}
+  },
+  {
+	"model": "recipe_book.recipecategories",
+	"pk": 11,
+	"fields": {
+	  "title": "Без категории",
+	  "recipes": []
+	}
+  }
+]

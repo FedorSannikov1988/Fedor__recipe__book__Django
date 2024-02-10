@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/recipe.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    <title> {{ title }} </title>
+{% endblock %}
+
+{% block content %}
+
+        <section>
+
+            <div class="content-for-recipe">
+
+                <h2 class="content-for-recipe__text__title">
+                    {{ recipe.title }}
+                </h2>
+
+                <div class="content-for-recipe__all_recipe">
+
+                <div>
+
+                    <img class="content-for-recipe__img"
+                              {% if recipe.image %}
+                         src="{{ recipe.image.url }}"
+                              {% elif not recipe.image %}
+                         src="{% static 'pictures/no_picture_for_recipe.png' %}"
+                              {% endif %}
+                         alt="{{ recipe.title }}">
+
+                    <div class="content-for-recipe_categories">
+                        Категории: &nbsp;&nbsp;&nbsp;&nbsp;
+                        {% for one_recipe_categories in recipe_categories %}
+
+                            <a class="content-for-recipe_categories__link"
+                                    href="{% url 'recipe_categories' one_recipe_categories.id %}">
+                            <button class="content-for-recipe_categories__button">
+                                {{ one_recipe_categories.title }}
+                            </button>
+
+                            </a> &nbsp;&nbsp;
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                    <div class="content-for-recipe__text">
+
+                        <p class="content-for-recipe__text__author">
+                            <strong>
+                                Автор рецепта:
+                            </strong>
+
+                            <a class="content-for-recipe__text__author__link"
+                               href="{% url 'users:information_about_author' recipe.author.id %}">
+                                {{ recipe.author.email }}
+                            </a>
+
+                        </p>
+
+                        <p class="content-for-recipe__text__cooking_time_in_minutes">
+                            <strong>
+                                Время приготовления:
+                            </strong>
+                            {{ recipe.cooking_time_in_minutes }}
+                            минут(-а).
+                        </p>
+
+                        <p class="content-for-recipe__text__products">
+                            <strong>
+                                Необходимые продукты:
+                            </strong>
+                            <br><br>
+                            {{ products }}
+                        </p>
+
+                        <p class="content-for-recipe__text__description">
+                            <strong>
+                                Описание:
+                            </strong>
+                            <br><br>
+                            {{ description }}
+                        </p>
+
+                        <p class="content-for-recipe__text__cooking_steps">
+                            <strong>
+                                Рецепт:
+                            </strong>
+                            <br><br>
+                            {{ cooking_steps }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="content-for-recipe__form_add_one_comment_wrapper">
+
+                    <form class="content-for-recipe__form_add_one_comment_form"
+                          action="{% url 'recipe' recipe.id %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_div }}
+                        <button
+                            class="content-for-recipe__form_add_one_comment__button_submit"
+                            type="submit">
+                                Оставить
+                        </button>
+                    </form>
+
+            </div>
+
+            <div class="content-for-recipe__all_comments_on_recipe">
+
+                {% for one_comment_on_recipe in comments_on_recipe %}
+
+                    <div class="content-for-recipe__one_comment_wrapper">
+
+                        <p class="content-for-recipe__one_comment_wrapper_text" >
+                            Оставлен: {{ one_comment_on_recipe.date_creation }}
+                            &nbsp;
+                            Изминен: {{ one_comment_on_recipe.date_change }}
+                        </p>
+
+                        <div id="id_comment_{{ one_comment_on_recipe.id }}"  class="content-for-recipe__one_comment">
+                            <p>
+                                {{ one_comment_on_recipe.comment }}
+                            </p>
+                        </div>
+
+                        <div class="content-for-recipe__one_comment_time">
+
+                            <a class="content-for-recipe__text__author__link"
+                               href="{% url 'users:information_about_author' one_comment_on_recipe.author.id %}">
+
+                                <p class="content-for-recipe__one_comment_wrapper_text">
+                                    Автор: {{ one_comment_on_recipe.author.email }}
+                                </p>
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+
+{% endblock %}

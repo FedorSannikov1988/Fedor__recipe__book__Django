@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/user_registration.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    <title> {{ title }} </title>
+{% endblock %}
+
+{% block content %}
+
+    <section>
+
+        <div class="content-for-user_registration">
+
+            <h2 class="content-for-user_registration__title">
+                Регистрация пользователя
+            </h2>
+
+            <div class="content-for-user_registration__form__container">
+                <div class="content-for-user_registration__form">
+                    <form action="{% url 'users:user_registration' %}" method="post">
+                        {% csrf_token %}
+                        {{ form.as_div }}
+                        <button
+                        class="content-for-user_registration__form__button"
+                        type="submit">
+                            Зарегестрироваться
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="content-for-user_registration__alert_message">
+
+                <div class="alert_message">
+                    {% if messages %}
+                        {% for message in messages %}
+
+                            {% if "error" in message.tags %}
+                                <div class="alert-error">
+                                    <p>
+                                        {{ message }}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {% if "success" in message.tags %}
+                                <div class="alert-success">
+                                    <p>
+                                        {{ message }}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+    </section>
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/log_in_personal_account.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    <title> {{ title }} </title>
+{% endblock %}
+
+{% block content %}
+
+    <section>
+
+        <div class="content-for-log_in_personal_account">
+
+            <h2 class="content-for-log_in_personal_account__title">
+                Вход в персональный аккаунт
+            </h2>
+
+            <div class="content-for-log_in_personal_account__form">
+                <form action="{% url 'users:log_in_personal_account' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+
+                    <a class="content-for-log_in_personal_account__form__link"
+                           href="{% url 'users:user_registration' %}">
+                            <span>
+                                Регистрация
+                            </span>
+                    </a> <br>
+                    <a class="content-for-log_in_personal_account__form__link"
+                           href="{% url 'users:forgot_password' %}">
+                            <span>
+                                Забыли пароль ?
+                            </span>
+                    </a> <br>
+
+                    <button
+                    class="content-for-log_in_personal_account__form__button"
+                    type="submit">
+                        Войти
+                    </button>
+
+                </form>
+
+
+            </div>
+
+            <div class="content-for-log_in_personal_account__alert_message">
+
+                <div class="alert_message">
+                    {% if messages %}
+                        {% for message in messages %}
+
+                            {% if "error" in message.tags %}
+                                <div class="alert-error">
+                                    <p>
+                                        {{ message }}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                            {% if "success" in message.tags %}
+                                <div class="alert-success">
+                                    <p>
+                                        {{ message }}
+                                    </p>
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

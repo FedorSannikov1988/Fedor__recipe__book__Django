@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <link href="{% static 'css/recipe_categories.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    <title> {{ title }} </title>
+{% endblock %}
+
+{% block content %}
+
+    <section>
+
+        <div class="index__all_content">
+
+            <div class="index__only_menu">
+
+                <dl class="menu-for-index__list">
+                    <dt class="menu-for-index__heading">
+                        <span>
+                            Категории Рецептов
+                        </span>
+                    </dt>
+
+                    <dd>
+                        <a href="#logo">
+                            <button class="menu-for-index__button">
+                                Вверх
+                            </button>
+                        </a>
+                    </dd>
+
+                    <dd>
+                        <a href="#content-footer">
+                            <button class="menu-for-index__button">
+                                Вниз
+                            </button>
+                        </a>
+                    </dd>
+
+                    {% for one_recipe_categories in all_recipe_categories %}
+                        <dd>
+                            <a href="{% url 'recipe_categories' one_recipe_categories.id %}">
+                                <button class="menu-for-index__button">
+                                    {{ one_recipe_categories.title }}
+                                </button>
+                            </a>
+                        </dd>
+                    {% endfor %}
+
+                </dl>
+
+            </div>
+
+            <div class="index__only_content">
+
+            {% if recipe_categories_paginator %}
+
+                <h2 class="index__only_content__title">
+                     {{ name_selected_category }}
+                </h2>
+
+                <div class="content-for-index__paginator">
+
+                    <p class="content-for-index__paginator__counter_all_recipes">
+                            Всего рецептов в категории
+                        <strong>
+                            {{ counter_all_recipes }}
+                        </strong>
+                    </p>
+
+                    <p class="content-for-index__paginator__switching_pages">
+
+                        {% if recipe_categories_paginator.has_previous %}
+
+                            <a class="content-for-index__paginator__switching_pages__links"
+                                   href="{% url 'recipe_categories__page_number' id_recipe_categories=id_recipe_categories page_number=recipe_categories_paginator.number|add:-1 %}">
+                                <button class="content-for-index__paginator__switching_pages__links__button">
+                                    <
+                                </button>
+                            </a>
+
+                        {% endif %}
+
+                        {{ recipe_categories_paginator.number }}
+                        стр. из
+                        {{ total_pages }}
+                        стр.
+
+                        {% if recipe_categories_paginator.has_next %}
+
+                            <a class="content-for-index__paginator__switching_pages__links"
+                                   href="{% url 'recipe_categories__page_number' id_recipe_categories=id_recipe_categories page_number=recipe_categories_paginator.number|add:1 %}">
+                                <button class="content-for-index__paginator__switching_pages__links__button">
+                                    >
+                                </button>
+                            </a>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+                <div class="content-for-index__grid_for_product_card">
+
+                    {% for one_recipe in recipe_categories_paginator %}
+
+                        <div class="content-for-index__product_card">
+
+                            <a class="content-for-index__product_card__img__links"
+                               href="{% url 'recipe' one_recipe.id %}">
+
+                                <img class="content-for-index__product_card__img"
+
+                                        {% if one_recipe.image %}
+                                             src="{{ one_recipe.image.url }}"
+                                        {% elif not one_recipe.image %}
+                                             src="{% static 'pictures/no_picture_for_recipe.png' %}"
+                                        {% endif %}
+                                             alt="{{ one_recipe.title }}">
+                            </a>
+                                    {% if one_recipe.title %}
+                                        <div class="content-for-index___container_for_product_card__title">
+                                            <a class="content-for-index___container_for_product_card__title__links"
+                                               href="{% url 'recipe' one_recipe.id %}">
+                                                <p class="content-for-index__product_card__title">
+                                                    {{ one_recipe.title }}
+                                                </p>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="content-for-index__container_for_product_card__time">
+                                        <p>
+                                            <strong>
+                                                {{ one_recipe.cooking_time_in_minutes }} мин.
+                                            </strong>
+                                        </p>
+                                    </div>
+
+
+                                    {% if one_recipe.description %}
+                                        <div class="content-for-index__container_for_product_card__description">
+                                            <p class="content-for-index__product_card__description">
+                                                {{ one_recipe.description }}
+                                            </p>
+                                        </div>
+                                    {% endif %}
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="content-for-index__paginator">
+
+                    <p class="content-for-index__paginator__counter_all_recipes">
+                            Всего рецептов в категории
+                        <strong>
+                            {{ counter_all_recipes }}
+                        </strong>
+                    </p>
+
+                    <p class="content-for-index__paginator__switching_pages">
+
+                        {% if recipe_categories_paginator.has_previous %}
+
+                            <a class="content-for-index__paginator__switching_pages__links"
+                                   href="{% url 'recipe_categories__page_number' id_recipe_categories=id_recipe_categories page_number=recipe_categories_paginator.number|add:-1 %}">
+                                <button class="content-for-index__paginator__switching_pages__links__button">
+                                    <
+                                </button>
+                            </a>
+
+                        {% endif %}
+
+                        {{ recipe_categories_paginator.number }}
+                        стр. из
+                        {{ total_pages }}
+                        стр.
+
+                        {% if recipe_categories_paginator.has_next %}
+
+                            <a class="content-for-index__paginator__switching_pages__links"
+                                   href="{% url 'recipe_categories__page_number' id_recipe_categories=id_recipe_categories page_number=recipe_categories_paginator.number|add:1 %}">
+                                <button class="content-for-index__paginator__switching_pages__links__button">
+                                    >
+                                </button>
+                            </a>
+
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            {% elif not recipe_categories_paginator %}
+
+                <div class="index__only_content__container_for_not_content" >
+                    <p class="index__only_content__not_content" >
+                        В данной категории нет рецептов.
+                    </p>
+                </div>
+
+            {% endif %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+{% endblock %}
