@@ -1,4 +1,4 @@
-#### Пед-проект по созданию <a href="https://fedorsannikov1988.pythonanywhere.com/">Сайт рецептов</a> на базе фреймворка Django.
+#### Учебный проект по созданию <a href="https://fedorsannikov1988.pythonanywhere.com/">Сайт рецептов</a> на базе фреймворка Django.
 
 #### Цель:
 
